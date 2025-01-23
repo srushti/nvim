@@ -7,12 +7,16 @@ return {
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    opts = {},
+    opts = {
+      adapters = { "neotest-jest" },
+    },
+    event = "LazyFile",
   },
   {
     "nvim-neotest/neotest-jest",
     dependencies = {
       "nvim-neotest/neotest",
     },
+    event = "LazyFile",
   },
 }
