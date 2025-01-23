@@ -123,13 +123,52 @@ return {
   },
   {
     "mileszs/ack.vim",
+    event = "LazyFile",
     config = function()
-      if 1 == vim.fn.executable("ag") then
-        vim.g.ackprg = "ag --vimgrep --smart-case"
+      if 1 == vim.fn.executable("rg") then
+        vim.g.ackprg = "rg --vimgrep --smart-case --hidden"
+        vim.g.ack_use_cword_for_empty_search = 1
       end
     end,
     keys = {
       { "<leader>a", ":Ack! ", "Search using ack or ag" },
+    },
+    opts = {
+      options = {
+        mode = "tabs",
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+      },
+    },
+  },
+  {
+    "ibhagwan/fzf-lua",
+    keys = {
+      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+    },
+  },
+  {
+    "rgroli/other.nvim",
+    event = "LazyFile",
+    config = function()
+      require("other-nvim").setup({
+        mappings = {
+          {
+            context = "test",
+            pattern = "/(.*)/(.*).ts$",
+            target = {
+              { target = "/%1/%2.test.ts" },
+              { target = "/%1/%2.spec.ts" },
+            },
+          },
+          { context = "source", pattern = "/(.*)/(.*).spec.ts$", target = "/%1/%2.ts" },
+          { context = "source", pattern = "/(.*)/(.*).test.ts$", target = "/%1/%2.ts" },
+        },
+        showMissingFiles = false,
+      })
+    end,
+    keys = {
+      { "<leader>O", ":Other<CR>", "Open related file" },
     },
   },
 }
