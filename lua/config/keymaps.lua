@@ -11,15 +11,7 @@ vim.api.nvim_create_user_command("Format", function(args)
   require("conform").format({ async = true, lsp_format = "fallback", range = range })
 end, { range = true })
 
-vim.cmd([[
-  function! SynStack()
-  	for id in synstack(line("."), col("."))
-      echo synIDattr(id, "name")
-    endfor
-  endfunc
-  ]])
--- nmap <silent><C-S> :call SynStack()<CR>
-vim.keymap.set("n", "<C-S>", ":call SynStack()<CR>")
+vim.keymap.set("n", "<C-S>", ":TSHighlightCapturesUnderCursor<CR>", { desc = "Check highlights", silent = true })
 vim.keymap.set("n", "<Enter>", "o<esc>")
 
 vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>")
