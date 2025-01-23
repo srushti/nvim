@@ -1,5 +1,5 @@
 vim.g.mapleader = ","
-vim.o.autowriteall = true
+vim.opt.swapfile = false
 
 vim.o.cursorcolumn = true
 vim.o.colorcolumn = "120"

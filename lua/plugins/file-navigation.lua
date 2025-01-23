@@ -1,6 +1,14 @@
 return {
   {
+    "stevearc/quicker.nvim",
+    event = "FileType qf",
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+  },
+  {
     "folke/which-key.nvim",
+    event = "LazyFile",
     opts = {
       spec = {
         { "<BS>", desc = "Decrement Selection", mode = "x" },
