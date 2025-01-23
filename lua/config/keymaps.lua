@@ -20,3 +20,4 @@ vim.cmd([[
   ]])
 -- nmap <silent><C-S> :call SynStack()<CR>
 vim.keymap.set("n", "<C-S>", ":call SynStack()<CR>")
+vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>")
