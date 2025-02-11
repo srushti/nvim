@@ -11,7 +11,12 @@ vim.api.nvim_create_user_command("Format", function(args)
   require("conform").format({ async = true, lsp_format = "fallback", range = range })
 end, { range = true })
 
-vim.keymap.set("n", "<C-S>", ":TSHighlightCapturesUnderCursor<CR>", { desc = "Check highlights", silent = true })
+vim.keymap.set("n", "<c-S>", ":TSHighlightCapturesUnderCursor<CR>", { desc = "Check highlights", silent = true })
+vim.keymap.set("i", "uu", "_")
+vim.keymap.set("i", "hh", "=>")
+vim.keymap.set("i", "--", "->")
+vim.keymap.set("i", "aa", "@")
+
 vim.keymap.set("n", "<Enter>", "o<esc>")
 
 vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>")
