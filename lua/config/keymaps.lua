@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>w", ":wa<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>w", ":w<cr>", { noremap = true, silent = true, unique = true })
 vim.api.nvim_create_user_command("Format", function(args)
   local range = nil
   if args.count ~= -1 then
@@ -11,11 +11,16 @@ vim.api.nvim_create_user_command("Format", function(args)
   require("conform").format({ async = true, lsp_format = "fallback", range = range })
 end, { range = true })
 
-vim.keymap.set("n", "<c-S>", ":TSHighlightCapturesUnderCursor<CR>", { desc = "Check highlights", silent = true })
-vim.keymap.set("i", "uu", "_")
-vim.keymap.set("i", "hh", "=>")
-vim.keymap.set("i", "--", "->")
-vim.keymap.set("i", "aa", "@")
+vim.keymap.set(
+  "n",
+  "<leader><c-s>",
+  ":TSHighlightCapturesUnderCursor<CR>",
+  { desc = "Check highlights", silent = true, unique = true }
+)
+vim.keymap.set("i", "uu", "_", { desc = "Insert mode underscore", silent = true, unique = true })
+vim.keymap.set("i", "hh", "=>", { desc = "Insert mode hashrocket", silent = true, unique = true })
+vim.keymap.set("i", "--", "->", { desc = "Insert mode arrow", silent = true, unique = true })
+vim.keymap.set("i", "aa", "@", { desc = "Insert mode @", silent = true, unique = true })
 
 vim.keymap.set("n", "<Enter>", "o<esc>")
 

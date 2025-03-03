@@ -1,10 +1,66 @@
 return {
   {
-    "stevearc/quicker.nvim",
-    event = "FileType qf",
-    ---@module "quicker"
-    ---@type quicker.SetupOptions
+    "xzbdmw/clasp.nvim",
+    config = function()
+      require("clasp").setup({
+        pairs = { ["{"] = "}", ['"'] = '"', ["'"] = "'", ["("] = ")", ["["] = "]" },
+      })
+
+      -- jumping from smallest region to largest region
+      vim.keymap.set({ "n", "i" }, "<c-l>", function()
+        require("clasp").wrap("next")
+      end)
+
+      -- jumping from largest region to smallest region
+      vim.keymap.set({ "n", "i" }, "<c-l>", function()
+        require("clasp").wrap("prev")
+      end)
+    end,
+  },
+  {
+    "bassamsdata/namu.nvim",
+    config = function()
+      require("namu").setup({
+        -- Enable the modules you want
+        namu_symbols = {
+          enable = true,
+          options = {}, -- here you can configure namu
+        },
+        -- Optional: Enable other modules if needed
+        colorscheme = {
+          enable = false,
+          options = {
+            -- NOTE: if you activate persist, then please remove any vim.cmd("colorscheme ...") in your config, no needed anymore
+            persist = true, -- very efficient mechanism to Remember selected colorscheme
+            write_shada = false, -- If you open multiple nvim instances, then probably you need to enable this
+          },
+        },
+        ui_select = { enable = false }, -- vim.ui.select() wrapper
+      })
+      -- === Suggested Keymaps: ===
+      local namu = require("namu.namu_symbols")
+      local colorscheme = require("namu.colorscheme")
+      vim.keymap.set("n", "<leader>Ns", namu.show, {
+        desc = "Jump to LSP symbol",
+        silent = true,
+        unique = true,
+      })
+      vim.keymap.set("n", "<leader>th", colorscheme.show, {
+        desc = "Colorscheme Picker",
+        silent = true,
+        unique = true,
+      })
+    end,
+  },
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
     opts = {},
+    -- Optional dependencies
+    dependencies = { { "echasnovski/mini.icons", opts = {} }, { "nvim-tree/nvim-web-devicons" } },
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
   },
   {
     "folke/which-key.nvim",
@@ -15,119 +71,6 @@ return {
         { "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
       },
     },
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
-    build = ":TSUpdate",
-    event = { "LazyFile", "VeryLazy" },
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    init = function(plugin)
-      -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-      -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-      -- no longer trigger the **nvim-treesitter** module to be loaded in time.
-      -- Luckily, the only things that those plugins need are the custom queries, which we make available
-      -- during startup.
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
-    end,
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    keys = {
-      { "<c-space>", desc = "Increment Selection" },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
-    },
-    opts_extend = { "ensure_installed" },
-    ---@type TSConfig
-    ---@diagnostic disable-next-line: missing-fields
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      ensure_installed = {
-        "bash",
-        "c",
-        "diff",
-        "html",
-        "javascript",
-        "jsdoc",
-        "json",
-        "jsonc",
-        "lua",
-        "luadoc",
-        "luap",
-        "markdown",
-        "markdown_inline",
-        "printf",
-        "python",
-        "query",
-        "regex",
-        "toml",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "xml",
-        "yaml",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
-      textobjects = {
-        move = {
-          enable = true,
-          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
-        },
-      },
-    },
-    ---@param opts TSConfig
-    config = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        opts.ensure_installed = LazyVim.dedup(opts.ensure_installed)
-      end
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "VeryLazy",
-    enabled = true,
-    config = function()
-      -- If treesitter is already loaded, we need to run config again for textobjects
-      if LazyVim.is_loaded("nvim-treesitter") then
-        local opts = LazyVim.opts("nvim-treesitter")
-        require("nvim-treesitter.configs").setup({ textobjects = opts.textobjects })
-      end
-
-      -- When in diff mode, we want to use the default
-      -- vim text objects c & C instead of the treesitter ones.
-      local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
-      local configs = require("nvim-treesitter.configs")
-      for name, fn in pairs(move) do
-        if name:find("goto") == 1 then
-          move[name] = function(q, ...)
-            if vim.wo.diff then
-              local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
-              for key, query in pairs(config or {}) do
-                if q == query and key:find("[%]%[][cC]") then
-                  vim.cmd("normal! " .. key)
-                  return
-                end
-              end
-            end
-            return fn(q, ...)
-          end
-        end
-      end
-    end,
   },
   {
     "mileszs/ack.vim",
@@ -172,5 +115,18 @@ return {
     keys = {
       { "<leader>O", ":Other<CR>", "Open related file" },
     },
+  },
+  {
+    "leath-dub/snipe.nvim",
+    keys = {
+      {
+        "gb",
+        function()
+          require("snipe").open_buffer_menu()
+        end,
+        desc = "Open Snipe buffer menu",
+      },
+    },
+    opts = { sort = "last" },
   },
 }
