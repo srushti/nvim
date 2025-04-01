@@ -2,13 +2,16 @@ return {
   { "tpope/vim-surround", event = "LazyFile" },
   { "tpope/vim-unimpaired", event = "LazyFile" },
   { "tpope/vim-sleuth", event = "LazyFile" },
-  { "simnalamburt/vim-mundo", event = "LazyFile" },
+  {
+    "mbbill/undotree",
+    event = "LazyFile",
+  },
   {
     "hedyhli/outline.nvim",
     event = "LazyFile",
     config = function()
       -- Example mapping to toggle outline
-      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline", unique = true })
+      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline", silent = true, unique = true })
 
       require("outline").setup({
         -- Your setup opts here (leave empty to use defaults)
@@ -27,33 +30,8 @@ return {
         -- You can customize some of the format options for the filetype (:help conform.format)
         rust = { "rustfmt", lsp_format = "fallback" },
         -- Conform will run the first available formatter
+        -- typescript = { "biome", "biome-check", "biome-organize-imports" },
         javascript = { "prettierd", "prettier" },
-      },
-    },
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "InsertEnter",
-    opts = {
-      suggestion = {
-        enabled = not vim.g.ai_cmp,
-        auto_trigger = true,
-        keymap = {
-          accept = false, -- handled by nvim-cmp / blink.cmp
-          next = "<M-]>",
-          prev = "<M-[>",
-        },
-      },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        javascript = true,
-        typescript = true,
-        ruby = true,
-        lua = true,
-        help = true,
       },
     },
   },
@@ -97,6 +75,52 @@ return {
             indent = 3,
           },
           { section = "startup" },
+        },
+      },
+    },
+  },
+  {
+    "saghen/blink.cmp",
+    dependencies = {
+      {
+        "giuxtaposition/blink-cmp-copilot",
+        "Kaiser-Yang/blink-cmp-avante",
+        "mikavilpas/blink-ripgrep.nvim",
+      },
+    },
+    opts = {
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer", "copilot", "avante", "ripgrep" },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            score_offset = 100,
+            async = true,
+          },
+          avante = {
+            module = "blink-cmp-avante",
+            name = "Avante",
+          },
+          ripgrep = {
+            module = "blink-ripgrep",
+            name = "Ripgrep",
+            ---@module "blink-ripgrep"
+            ---@type blink-ripgrep.Options
+            opts = {
+              search_casing = "--smart-case",
+            },
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                item.kind_name = "File"
+                item.kind_icon = "🔎"
+                item.labelDisplays = {
+                  description = "(rg)",
+                }
+              end
+              return items
+            end,
+          },
         },
       },
     },
