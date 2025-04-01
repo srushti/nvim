@@ -14,8 +14,6 @@ return {
         },
         mid = { "lsp" },
         right = {
-          "cool_symbol",
-          "  ",
           vim.bo.fileencoding:upper(),
           "right_sep_double",
           "-line_column",
