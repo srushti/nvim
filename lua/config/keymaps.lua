@@ -22,6 +22,6 @@ vim.keymap.set("i", "hh", "=>", { desc = "Insert mode hashrocket", silent = true
 vim.keymap.set("i", "--", "->", { desc = "Insert mode arrow", silent = true, unique = true })
 vim.keymap.set("i", "aa", "@", { desc = "Insert mode @", silent = true, unique = true })
 
-vim.keymap.set("n", "<Enter>", "o<esc>")
-
-vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>")
+vim.keymap.set("n", "<Enter>", "o<esc>", { desc = "Insert newline below", silent = true })
+vim.keymap.set("n", "<C-j>", "ddp")
+vim.keymap.set("n", "<C-k>", "kddpk")
