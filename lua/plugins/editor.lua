@@ -30,8 +30,8 @@ return {
         -- You can customize some of the format options for the filetype (:help conform.format)
         rust = { "rustfmt", lsp_format = "fallback" },
         -- Conform will run the first available formatter
-        -- typescript = { "biome", "biome-check", "biome-organize-imports" },
-        javascript = { "prettierd", "prettier" },
+        typescript = { "biome", "biome-check", "biome-organize-imports" },
+        -- javascript = { "prettierd", "prettier" },
       },
     },
   },
@@ -101,6 +101,28 @@ return {
           avante = {
             module = "blink-cmp-avante",
             name = "Avante",
+            opts = {
+              command = {
+                get_kind_name = function()
+                  return "AvanteCmd"
+                end,
+              },
+              mention = {
+                get_kind_name = function()
+                  return "AvanteMention"
+                end,
+              },
+            },
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                -- item.kind_name = "File"
+                item.kind_icon = "📄"
+                item.labelDisplays = {
+                  description = "(avante)",
+                }
+              end
+              return items
+            end,
           },
           ripgrep = {
             module = "blink-ripgrep",

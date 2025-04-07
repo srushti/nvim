@@ -60,4 +60,20 @@ return {
       { "<leader>it", ":ToggleTerm<cr>", desc = "Toggle Terminal", silent = true, unique = true, mode = "n" },
     },
   },
+  {
+    "stevearc/overseer.nvim",
+    opts = {},
+    keys = {
+      { "<leader>io", ":OverseerToggle<cr>", desc = "Overseer Toggle", silent = true, unique = true, mode = "n" },
+      { "<leader>ir", ":OverseerRun<cr>", desc = "Overseer Run", silent = true, unique = true, mode = "n" },
+      {
+        "<leader>iR",
+        ":OverseerRestartLast<cr>",
+        desc = "Overseer Restart Last",
+        silent = true,
+        unique = true,
+        mode = "n",
+      },
+    },
+  },
 }

@@ -78,7 +78,7 @@ return {
       })
     end,
     keys = {
-      { "<leader>O", ":Other<CR>", "Open related file", { silent = true } },
+      { "<leader>oo", ":Other<CR>", "Open related file", { silent = true } },
     },
   },
   {

@@ -7,7 +7,7 @@ return {
     opts = {
       -- add any opts here
       -- for example
-      provider = "openai",
+      provider = "gemini",
       vendors = {
         ---@type AvanteProvider
         deepseek = {
@@ -26,7 +26,7 @@ return {
       },
       gemini = {
         endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-        model = "gemini-1.5-flash-latest",
+        model = "gemini-2.5-pro-exp-03-25",
         timeout = 30000, -- Timeout in milliseconds
         temperature = 0,
         max_tokens = 4096,
@@ -38,7 +38,6 @@ return {
     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
@@ -76,6 +75,7 @@ return {
     },
   },
   { "giuxtaposition/blink-cmp-copilot", event = "VeryLazy", dependencies = "zbirenbaum/copilot.lua" },
+  { "Kaiser-Yang/blink-cmp-avante", event = "VeryLazy", dependencies = "yetone/avante.nvim" },
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
