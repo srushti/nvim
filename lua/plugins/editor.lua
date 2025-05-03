@@ -2,10 +2,24 @@ return {
   { "tpope/vim-surround", event = "LazyFile" },
   { "tpope/vim-unimpaired", event = "LazyFile" },
   { "tpope/vim-sleuth", event = "LazyFile" },
+  { "ervandew/supertab", event = "LazyFile" },
   {
-    "mbbill/undotree",
+    "tpope/vim-abolish",
     event = "LazyFile",
+    config = function()
+      vim.cmd("Abolish projcet project")
+    end,
   },
+  { "MeanderingProgrammer/render-markdown.nvim", opts = { anti_conceal = { enabled = false } }, event = "LazyFile" },
+  {
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+    keys = { -- load the plugin only when using it's keybinding:
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
+  },
+  { "HiPhish/rainbow-delimiters.nvim", event = "LazyFile" },
   {
     "hedyhli/outline.nvim",
     event = "LazyFile",
@@ -23,6 +37,13 @@ return {
     event = "LazyFile",
     optional = true,
     opts = {
+      formatters = {
+        kulala = {
+          command = "kulala-fmt",
+          args = { "format", "$FILENAME" },
+          stdin = false,
+        },
+      },
       formatters_by_ft = {
         lua = { "stylua" },
         -- Conform will run multiple formatters sequentially
@@ -32,6 +53,7 @@ return {
         -- Conform will run the first available formatter
         typescript = { "biome", "biome-check", "biome-organize-imports" },
         -- javascript = { "prettierd", "prettier" },
+        http = { "kulala" },
       },
     },
   },
@@ -86,11 +108,12 @@ return {
         "giuxtaposition/blink-cmp-copilot",
         "Kaiser-Yang/blink-cmp-avante",
         "mikavilpas/blink-ripgrep.nvim",
+        "olimorris/codecompanion.nvim",
       },
     },
     opts = {
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot", "avante", "ripgrep" },
+        default = { "lsp", "path", "snippets", "buffer", "copilot", "avante", "ripgrep", "codecompanion" },
         providers = {
           copilot = {
             name = "copilot",

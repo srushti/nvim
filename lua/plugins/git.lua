@@ -9,8 +9,8 @@ return {
         "<cmd>Git commit<CR>",
         { silent = true, desc = "Commit the changes", unique = true }
       )
-      vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>", { silent = true, desc = "Git write", unique = true })
-      vim.keymap.set("n", "<leader>gi", ":Git<cr>", { silent = true, desc = "Git status", unique = true })
+      vim.keymap.set("n", "<leader>Gw", ":Gwrite<cr>", { silent = true, desc = "Git write", unique = true })
+      vim.keymap.set("n", "<leader>Gi", ":Git<cr>", { silent = true, desc = "Git status", unique = true })
       vim.api.nvim_create_autocmd({ "FileType" }, {
         pattern = "fugitive",
         desc = "QuickFix <leader><Enter>",

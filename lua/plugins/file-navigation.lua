@@ -18,6 +18,20 @@ return {
     end,
   },
   {
+    "ggandor/leap.nvim",
+    lazy = false,
+    dependencies = { { "tpope/vim-repeat" } },
+    config = function()
+      require("leap").add_default_mappings()
+      require("leap").set_default_keymaps({
+        ["s"] = { "s", "Leap forward to" },
+        ["S"] = { "S", "Leap backward to" },
+        ["<leader>f"] = { "<Plug>(leap-forward-to)", "Leap forward to" },
+        ["<leader>F"] = { "<Plug>(leap-backward-to)", "Leap backward to" },
+      })
+    end,
+  },
+  {
     "stevearc/oil.nvim",
     ---@module 'oil'
     ---@type oil.SetupOpts
@@ -50,7 +64,6 @@ return {
       { "<leader>a", ":Ack! ", "Search using ack or ag" },
     },
   },
-  { "nvim-treesitter/playground", event = "LazyFile" },
   {
     "ibhagwan/fzf-lua",
     keys = {
