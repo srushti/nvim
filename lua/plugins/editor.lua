@@ -108,12 +108,11 @@ return {
         "giuxtaposition/blink-cmp-copilot",
         "Kaiser-Yang/blink-cmp-avante",
         "mikavilpas/blink-ripgrep.nvim",
-        "olimorris/codecompanion.nvim",
       },
     },
     opts = {
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot", "avante", "ripgrep", "codecompanion" },
+        default = { "lsp", "path", "snippets", "buffer", "copilot", "avante", "ripgrep" },
         providers = {
           copilot = {
             name = "copilot",
