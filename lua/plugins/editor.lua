@@ -1,13 +1,31 @@
 return {
+  { "r0nsha/multinput.nvim", event = "VeryLazy" },
+  { "RaafatTurki/corn.nvim" },
   { "tpope/vim-surround", event = "LazyFile" },
   { "tpope/vim-unimpaired", event = "LazyFile" },
   { "tpope/vim-sleuth", event = "LazyFile" },
   { "ervandew/supertab", event = "LazyFile" },
+  { "axelvc/template-string.nvim", event = "LazyFile" },
+  {
+    "zaucy/mcos.nvim",
+    dependencies = {
+      "jake-stewart/multicursor.nvim",
+    },
+    config = function()
+      local mcos = require("mcos")
+      mcos.setup({})
+
+      -- mcos doesn't setup any keymaps
+      -- here are some recommended ones
+      vim.keymap.set({ "n", "v" }, "gms", mcos.opkeymapfunc, { expr = true })
+      vim.keymap.set({ "n" }, "gmss", mcos.bufkeymapfunc)
+    end,
+  },
   {
     "tpope/vim-abolish",
     event = "LazyFile",
     config = function()
-      vim.cmd("Abolish projcet project")
+      vim.cmd("Abolish projcet{s} project{}")
     end,
   },
   { "MeanderingProgrammer/render-markdown.nvim", opts = { anti_conceal = { enabled = false } }, event = "LazyFile" },
@@ -25,7 +43,7 @@ return {
     event = "LazyFile",
     config = function()
       -- Example mapping to toggle outline
-      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline", silent = true, unique = true })
+      vim.keymap.set("n", "<leader>O", "<cmd>Outline<CR>", { desc = "Toggle Outline", silent = true, unique = true })
 
       require("outline").setup({
         -- Your setup opts here (leave empty to use defaults)
@@ -54,50 +72,7 @@ return {
         typescript = { "biome", "biome-check", "biome-organize-imports" },
         -- javascript = { "prettierd", "prettier" },
         http = { "kulala" },
-      },
-    },
-  },
-  {
-    "folke/snacks.nvim",
-    ---@type snacks.Config
-    opts = {
-      image = {},
-      dashboard = {
-        width = 50,
-        sections = {
-          {
-            pane = 1,
-            section = "terminal",
-            cmd = "basename `pwd` | figlet -f slant | lolcat",
-            height = 20,
-            padding = 1,
-          },
-          {
-            pane = 2,
-            section = "terminal",
-            cmd = "cowsay -rC `fortune -s`",
-            height = 20,
-            padding = 1,
-          },
-          { section = "keys", gap = 1, padding = 1 },
-          { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-          { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-          {
-            pane = 2,
-            icon = " ",
-            title = "Git Status",
-            section = "terminal",
-            enabled = function()
-              return Snacks.git.get_root() ~= nil
-            end,
-            cmd = "git status --short --branch --renames",
-            height = 5,
-            padding = 1,
-            ttl = 5 * 60,
-            indent = 3,
-          },
-          { section = "startup" },
-        },
+        ruby = { "rubocop", "rubocop-autocorrect" },
       },
     },
   },
@@ -108,12 +83,33 @@ return {
         "giuxtaposition/blink-cmp-copilot",
         "Kaiser-Yang/blink-cmp-avante",
         "mikavilpas/blink-ripgrep.nvim",
+        "rafamadriz/friendly-snippets",
+        "milanglacier/minuet-ai.nvim",
       },
     },
     opts = {
+      keymap = {
+        ["<A-m>"] = require("minuet").make_blink_map(),
+      },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot", "avante", "ripgrep" },
+        default = { "lsp", "path", "ripgrep", "snippets", "copilot", "avante" },
         providers = {
+          minuet = {
+            name = "minuet",
+            module = "minuet.blink",
+            async = true,
+            timeout_ms = 3000,
+            score_offset = 50,
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                item.kind_icon = "💃🏽"
+                item.labelDisplays = {
+                  description = "(minuet)",
+                }
+              end
+              return items
+            end,
+          },
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",

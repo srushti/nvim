@@ -25,3 +25,17 @@ vim.keymap.set("i", "aa", "@", { desc = "Insert mode @", silent = true, unique =
 vim.keymap.set("n", "<Enter>", "o<esc>", { desc = "Insert newline below", silent = true })
 vim.keymap.set("n", "<C-j>", "ddp")
 vim.keymap.set("n", "<C-k>", "kddpk")
+
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })
+
+local wk = require("which-key")
+wk.add({
+  { "<leader>ia", group = "Aider" },
+  { "<leader>i", group = "Interactive" },
+  { "<leader>G", group = "Git" },
+  { "<leader>z", group = "Zk" },
+  { "<leader>a", group = "Avante" },
+
+  { "<leader>iT", icon = "$" },
+  { "<leader>iF", icon = "$" },
+})

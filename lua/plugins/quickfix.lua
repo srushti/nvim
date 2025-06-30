@@ -11,15 +11,15 @@ return {
     "gabrielpoca/replacer.nvim",
     event = "FileType qf",
     opts = { rename_files = false },
-    keys = {
-      {
-        "<leader>h",
-        function()
-          require("replacer").run()
-          require("bqf.main").toggle()
-        end,
-        desc = "run replacer.nvim",
-      },
-    },
+    -- keys = {
+    --   {
+    --     "<leader>h",
+    --     function()
+    --       require("replacer").run()
+    --       require("bqf.main").toggle()
+    --     end,
+    --     desc = "run replacer.nvim",
+    --   },
+    -- },
   },
 }

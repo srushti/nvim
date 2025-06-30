@@ -1,5 +1,10 @@
 return {
   {
+    "rktjmp/lush.nvim",
+    -- if you wish to use your own colorscheme:
+    { dir = "~/.local/share/nvim/lazy/my.vim", lazy = true },
+  },
+  {
     "aileot/ex-colors.nvim",
     lazy = true,
     cmd = "ExColors",

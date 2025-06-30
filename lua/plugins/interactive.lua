@@ -1,5 +1,14 @@
 return {
   {
+    "nvzone/floaterm",
+    dependencies = { "nvzone/volt" },
+    event = "VeryLazy",
+    keys = {
+      { "<leader>iT", "<cmd>FloatermToggle<cr>", desc = "Toggle Floaterm" },
+      { "<leader>iF", "<cmd>FloatermFind<cr>", desc = "Find Floaterm" },
+    },
+  },
+  {
     "Vigemus/iron.nvim",
     cmd = {
       "IronRepl",
@@ -12,10 +21,10 @@ return {
       "IronAttach",
     },
     keys = {
-      { "<leader>ir", "<cmd>IronRepl<cr>" },
-      { "<leader>is", "<cmd>IronRestart<cr>" },
-      { "<leader>if", "<cmd>IronFocus<cr>" },
-      { "<leader>ih", "<cmd>IronHide<cr>" },
+      { "<leader>ip", "<cmd>IronRepl<cr>", desc = "IronRepl" },
+      { "<leader>is", "<cmd>IronRestart<cr>", desc = "IronRestart" },
+      { "<leader>if", "<cmd>IronFocus<cr>", desc = "IronFocus" },
+      { "<leader>ih", "<cmd>IronHide<cr>", desc = "IronHide" },
     },
     main = "iron.core", -- <== This informs lazy.nvim to use the entrypoint of `iron.core` to load the configuration.
     opts = {
