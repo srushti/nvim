@@ -1,0 +1,120 @@
+return {
+  {
+    "otavioschwanck/fzf-lua-explorer.nvim",
+    dependencies = { "ibhagwan/fzf-lua" },
+    keys = {
+      { "<leader>e", "<cmd>lua require('fzf-lua-explorer').explorer()<cr>", desc = "Explorer" },
+    },
+    config = function()
+      require("fzf-lua-explorer").setup()
+    end,
+  },
+  {
+    "otavioschwanck/fzf-lua-enchanted-files",
+    event = "LazyFile",
+    dependencies = { "ibhagwan/fzf-lua" },
+    keys = {
+      { "<leader>z", ":FzfLuaFiles<CR>", "Open related file", { silent = true } },
+    },
+    config = function()
+      vim.g.fzf_lua_enchanted_files = {
+        max_history_per_cwd = 50,
+      }
+    end,
+  },
+  {
+    "ibhagwan/fzf-lua",
+    keys = {
+      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+    },
+  },
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { "echasnovski/mini.icons", opts = {} }, { "nvim-tree/nvim-web-devicons" } },
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
+  },
+  {
+    "A7Lavinraj/fyler.nvim",
+    dependencies = { "echasnovski/mini.icons" },
+    opts = {
+      window_config = {
+        split = "left",
+      },
+    },
+  },
+  {
+    "rgroli/other.nvim",
+    event = "LazyFile",
+    config = function()
+      require("other-nvim").setup({
+        mappings = {
+          {
+            context = "test",
+            pattern = "/(.*)/(.*).ts$",
+            target = {
+              { target = "/%1/%2.test.ts" },
+              { target = "/%1/%2.spec.ts" },
+            },
+          },
+          { context = "controller", pattern = "/(.*)/(.*).service.ts$", target = "/%1/%2.controller.ts" },
+          { context = "service", pattern = "/(.*)/(.*).controller.ts$", target = "/%1/%2.service.ts" },
+          { context = "source", pattern = "/(.*)/(.*).spec.ts$", target = "/%1/%2.ts" },
+          { context = "source", pattern = "/(.*)/(.*).test.ts$", target = "/%1/%2.ts" },
+        },
+        showMissingFiles = false,
+      })
+    end,
+    keys = {
+      { "<leader>oo", ":Other<CR>", "Open related file", { silent = true } },
+    },
+  },
+  {
+    "otavioschwanck/arrow.nvim",
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+      -- or if using `mini.icons`
+      -- { "echasnovski/mini.icons" },
+    },
+    opts = {
+      show_icons = true,
+      leader_key = "\\", -- Recommended to be a single key
+      buffer_leader_key = "m", -- Per Buffer Mappings
+    },
+  },
+  {
+    "xzbdmw/clasp.nvim",
+    config = function()
+      require("clasp").setup({
+        pairs = { ["{"] = "}", ['"'] = '"', ["'"] = "'", ["("] = ")", ["["] = "]" },
+      })
+
+      -- jumping from smallest region to largest region
+      vim.keymap.set({ "n", "i" }, "<c-l>", function()
+        require("clasp").wrap("next")
+      end)
+
+      -- jumping from largest region to smallest region
+      vim.keymap.set({ "n", "i" }, "<c-l>", function()
+        require("clasp").wrap("prev")
+      end)
+    end,
+  },
+  {
+    "leath-dub/snipe.nvim",
+    keys = {
+      {
+        "gb",
+        function()
+          require("snipe").open_buffer_menu()
+        end,
+        desc = "Open Snipe buffer menu",
+      },
+    },
+    opts = { sort = "last" },
+  },
+}
