@@ -1,4 +1,19 @@
 return {
+  { "lmintmate/blue-mood-vim", event = "VeryLazy" },
+  { "morhetz/gruvbox", event = "VeryLazy" },
+  { "sainnhe/everforest", event = "VeryLazy" },
+  { "flazz/vim-colorschemes", event = "VeryLazy" },
+  { "khoido2003/classic_monokai.nvim", event = "VeryLazy" },
+  { "deadlightreal/crimson-nvim", event = "VeryLazy" },
+  { "szammyboi/dune.nvim", event = "VeryLazy" },
+  { "cmoscofian/nibble-vim", event = "VeryLazy" },
+  {
+    "HampusHauffman/peacock.nvim",
+    lazy = false,
+    config = function()
+      require("peacock").setup()
+    end,
+  },
   {
     "rktjmp/lush.nvim",
     -- if you wish to use your own colorscheme:
@@ -10,9 +25,9 @@ return {
     cmd = "ExColors",
     ---@type ExColors.Config
     opts = {},
-    config = function()
-      vim.cmd("colorscheme ex-camouflage")
-    end,
+    -- config = function()
+    --   vim.cmd("colorscheme ex-camouflage")
+    -- end,
   },
   {
     "rachartier/tiny-glimmer.nvim",
