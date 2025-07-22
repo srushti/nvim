@@ -60,15 +60,27 @@ return {
     },
   },
   {
-    "akinsho/toggleterm.nvim",
-    config = function()
-      require("toggleterm").setup({})
+    "waiting-for-dev/ergoterm.nvim",
+    event = "VeryLazy",
+    config = function(opts)
+      require("ergoterm").setup(opts)
     end,
-    cmd = { "ToggleTerm" },
+    cmd = { "TermNew", "TermSelect" },
     keys = {
-      { "<leader>it", ":ToggleTerm<cr>", desc = "Toggle Terminal", silent = true, unique = true, mode = "n" },
+      { "<leader>it", "<cmd>TermNew<cr>", desc = "New Term" },
+      { "<leader>iS", "<cmd>TermSelect<cr>", desc = "Find Term" },
     },
   },
+  -- {
+  --   "akinsho/toggleterm.nvim",
+  --   config = function()
+  --     require("toggleterm").setup({})
+  --   end,
+  --   cmd = { "ToggleTerm" },
+  --   keys = {
+  --     { "<leader>it", ":ToggleTerm<cr>", desc = "Toggle Terminal", silent = true, unique = true, mode = "n" },
+  --   },
+  -- },
   {
     "stevearc/overseer.nvim",
     opts = {},

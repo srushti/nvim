@@ -1,4 +1,5 @@
 return {
+  { "samiulsami/fFtT-highlights.nvim", event = "LazyFile" },
   {
     "aaronik/treewalker.nvim",
     event = "LazyFile",

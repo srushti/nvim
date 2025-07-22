@@ -92,7 +92,7 @@ return {
         ["<A-m>"] = require("minuet").make_blink_map(),
       },
       sources = {
-        default = { "lsp", "path", "ripgrep", "snippets", "copilot", "avante" },
+        default = { "lsp", "path", "ripgrep", "snippets", "minuet", "copilot", "avante" },
         providers = {
           minuet = {
             name = "minuet",
@@ -133,8 +133,7 @@ return {
             },
             transform_items = function(_, items)
               for _, item in ipairs(items) do
-                -- item.kind_name = "File"
-                item.kind_icon = "📄"
+                item.kind_icon = "⏩︎"
                 item.labelDisplays = {
                   description = "(avante)",
                 }
@@ -153,7 +152,7 @@ return {
             transform_items = function(_, items)
               for _, item in ipairs(items) do
                 item.kind_name = "File"
-                item.kind_icon = "🔎"
+                item.kind_icon = "📄"
                 item.labelDisplays = {
                   description = "(rg)",
                 }

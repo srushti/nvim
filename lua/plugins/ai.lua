@@ -33,7 +33,12 @@ return {
       },
       config = function()
         require("minuet").setup({
-          provider = "gemini",
+          provider = "openai",
+          provider_options = {
+            openai = {
+              model = "gpt-4.1-mini",
+            },
+          },
         })
       end,
     },

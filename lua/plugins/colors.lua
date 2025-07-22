@@ -3,9 +3,7 @@ return {
   { "morhetz/gruvbox", event = "VeryLazy" },
   { "sainnhe/everforest", event = "VeryLazy" },
   { "khoido2003/classic_monokai.nvim", event = "VeryLazy" },
-  { "deadlightreal/crimson-nvim", event = "VeryLazy" },
   { "szammyboi/dune.nvim", event = "VeryLazy" },
-  { "cmoscofian/nibble-vim", event = "VeryLazy" },
   {
     "HampusHauffman/peacock.nvim",
     lazy = false,
