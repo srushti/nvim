@@ -1,7 +1,23 @@
 return {
   { "r0nsha/multinput.nvim", event = "VeryLazy" },
-  { "RaafatTurki/corn.nvim" },
-  { "tpope/vim-surround", event = "LazyFile" },
+  {
+    "echasnovski/mini.surround",
+    event = "LazyFile",
+    opts = {
+      mappings = {
+        add = "ya", -- Add surrounding in Normal and Visual modes
+        delete = "yd", -- Delete surrounding
+        find = "yf", -- Find surrounding (to the right)
+        find_left = "yF", -- Find surrounding (to the left)
+        highlight = "yh", -- Highlight surrounding
+        replace = "yr", -- Replace surrounding
+        update_n_lines = "yn", -- Update `n_lines`
+
+        suffix_last = "l", -- Suffix to search with "prev" method
+        suffix_next = "n", -- Suffix to search with "next" method
+      },
+    },
+  },
   { "tpope/vim-unimpaired", event = "LazyFile" },
   { "tpope/vim-sleuth", event = "LazyFile" },
   { "ervandew/supertab", event = "LazyFile" },
@@ -147,12 +163,16 @@ return {
             ---@module "blink-ripgrep"
             ---@type blink-ripgrep.Options
             opts = {
-              search_casing = "--smart-case",
+              backend = {
+                ripgrep = {
+                  search_casing = "smart-case",
+                },
+              },
             },
             transform_items = function(_, items)
               for _, item in ipairs(items) do
                 item.kind_name = "File"
-                item.kind_icon = "📄"
+                item.kind_icon = "📂"
                 item.labelDisplays = {
                   description = "(rg)",
                 }

@@ -71,16 +71,7 @@ return {
       { "<leader>iS", "<cmd>TermSelect<cr>", desc = "Find Term" },
     },
   },
-  -- {
-  --   "akinsho/toggleterm.nvim",
-  --   config = function()
-  --     require("toggleterm").setup({})
-  --   end,
-  --   cmd = { "ToggleTerm" },
-  --   keys = {
-  --     { "<leader>it", ":ToggleTerm<cr>", desc = "Toggle Terminal", silent = true, unique = true, mode = "n" },
-  --   },
-  -- },
+  { "xb-bx/editable-term.nvim", config = true },
   {
     "stevearc/overseer.nvim",
     opts = {},

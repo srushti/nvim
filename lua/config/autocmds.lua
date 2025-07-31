@@ -12,3 +12,13 @@ vim.api.nvim_create_autocmd("BufLeave", {
     vim.cmd("wa")
   end,
 })
+
+local lsp_hacks = vim.api.nvim_create_augroup("LspHacks", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+  group = lsp_hacks,
+  pattern = ".env*",
+  callback = function(e)
+    vim.diagnostic.enable(false, { bufnr = e.buf })
+  end,
+})

@@ -4,6 +4,7 @@ return {
   { "sainnhe/everforest", event = "VeryLazy" },
   { "khoido2003/classic_monokai.nvim", event = "VeryLazy" },
   { "szammyboi/dune.nvim", event = "VeryLazy" },
+  { "leobeosab/tearout.nvim", event = "VeryLazy" },
   {
     "HampusHauffman/peacock.nvim",
     lazy = false,
