@@ -1,6 +1,12 @@
 return {
   {
-    "echasnovski/mini.snippets",
+    "al-kot/typst-preview.nvim",
+    -- opts = {
+    --   -- your config here
+    -- },
+  },
+  {
+    "nvim-mini/mini.snippets",
     event = "LazyFile",
     config = function(_, opts)
       local gen_loader = require("mini.snippets").gen_loader

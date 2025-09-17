@@ -1,24 +1,52 @@
 return {
   { "r0nsha/multinput.nvim", event = "VeryLazy" },
   {
-    "echasnovski/mini.surround",
-    event = "LazyFile",
-    opts = {
-      mappings = {
-        add = "ya", -- Add surrounding in Normal and Visual modes
-        delete = "yd", -- Delete surrounding
-        find = "yf", -- Find surrounding (to the right)
-        find_left = "yF", -- Find surrounding (to the left)
-        highlight = "yh", -- Highlight surrounding
-        replace = "yr", -- Replace surrounding
-        update_n_lines = "yn", -- Update `n_lines`
-
-        suffix_last = "l", -- Suffix to search with "prev" method
-        suffix_next = "n", -- Suffix to search with "next" method
+    "retran/meow.yarn.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    config = function()
+      require("meow.yarn").setup({
+        -- Your config here
+      })
+    end,
+    keys = {
+      {
+        "<leader>mt",
+        function()
+          require("meow.yarn").open_tree("type_hierarchy", "supertypes")
+        end,
+        desc = "Supertypes",
+      },
+      {
+        "<leader>mT",
+        function()
+          require("meow.yarn").open_tree("type_hierarchy", "subtypes")
+        end,
+        desc = "Subtypes",
+      },
+      {
+        "<leader>mc",
+        function()
+          require("meow.yarn").open_tree("type_hierarchy", "callers")
+        end,
+        desc = "Callers",
+      },
+      {
+        "<leader>mC",
+        function()
+          require("meow.yarn").open_tree("type_hierarchy", "callees")
+        end,
+        desc = "Callees",
       },
     },
   },
-  { "tpope/vim-unimpaired", event = "LazyFile" },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    config = function()
+      require("nvim-surround").setup({})
+    end,
+  },
   { "tpope/vim-sleuth", event = "LazyFile" },
   { "ervandew/supertab", event = "LazyFile" },
   { "axelvc/template-string.nvim", event = "LazyFile" },

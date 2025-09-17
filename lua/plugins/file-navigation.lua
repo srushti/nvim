@@ -1,4 +1,10 @@
 return {
+  {
+    "gen740/SmoothCursor.nvim",
+    config = function()
+      require("smoothcursor").setup()
+    end,
+  },
   { "samiulsami/fFtT-highlights.nvim", event = "LazyFile" },
   {
     "aaronik/treewalker.nvim",

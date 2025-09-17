@@ -1,5 +1,17 @@
 return {
   {
+    "elanmed/fzf-lua-frecency.nvim",
+    dependencies = { "ibhagwan/fzf-lua" },
+    keys = {
+      {
+        "<leader>'",
+        "<cmd>lua require('fzf-lua-frecency').frecency({cwd_only=true, display_score=false})<cr>",
+        desc = "Frecency",
+      },
+      -- { "<leader>'", ":FzfLua frecency cwd_only=true<cr>", desc = "Frecency" },
+    },
+  },
+  {
     "otavioschwanck/fzf-lua-explorer.nvim",
     dependencies = { "ibhagwan/fzf-lua" },
     keys = {
@@ -34,18 +46,9 @@ return {
     ---@type oil.SetupOpts
     opts = {},
     -- Optional dependencies
-    dependencies = { { "echasnovski/mini.icons", opts = {} }, { "nvim-tree/nvim-web-devicons" } },
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
     -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
     lazy = false,
-  },
-  {
-    "A7Lavinraj/fyler.nvim",
-    dependencies = { "echasnovski/mini.icons" },
-    opts = {
-      window_config = {
-        split = "left",
-      },
-    },
   },
   {
     "rgroli/other.nvim",
@@ -77,8 +80,6 @@ return {
     "otavioschwanck/arrow.nvim",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
-      -- or if using `mini.icons`
-      -- { "echasnovski/mini.icons" },
     },
     opts = {
       show_icons = true,

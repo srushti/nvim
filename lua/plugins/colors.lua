@@ -1,4 +1,7 @@
 return {
+  { "rose-pine/neovim", name = "rose-pine", lazy = false },
+  -- { "xiyaowong/transparent.nvim", lazy = false },
+  { "cooperuser/glowbeam.nvim", event = "VeryLazy" },
   { "lmintmate/blue-mood-vim", event = "VeryLazy" },
   { "morhetz/gruvbox", event = "VeryLazy" },
   { "sainnhe/everforest", event = "VeryLazy" },
@@ -14,7 +17,6 @@ return {
   },
   {
     "rktjmp/lush.nvim",
-    -- if you wish to use your own colorscheme:
     { dir = "~/.local/share/nvim/lazy/my.vim", lazy = true },
   },
   {

@@ -9,3 +9,5 @@ vim.o.relativenumber = false
 vim.opt.clipboard = ""
 
 vim.g.lazyvim_prettier_needs_config = false
+
+vim.g.completeopt = "menu,menuone,noselect,fuzzy,nosort"
