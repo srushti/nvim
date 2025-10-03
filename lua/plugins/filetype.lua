@@ -1,9 +1,12 @@
 return {
+  { "al-kot/typst-preview.nvim" },
   {
-    "al-kot/typst-preview.nvim",
-    -- opts = {
-    --   -- your config here
-    -- },
+    "OXY2DEV/markview.nvim",
+    event = "LazyFile",
+    priority = 49,
+    dependencies = {
+      "saghen/blink.cmp",
+    },
   },
   {
     "nvim-mini/mini.snippets",

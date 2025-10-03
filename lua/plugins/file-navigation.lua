@@ -1,5 +1,13 @@
 return {
   {
+    "zerochae/endpoint.nvim",
+    dependencies = { "stevearc/dressing.nvim" },
+    cmd = { "Endpoint", "EndpointRefresh" },
+    config = function()
+      require("endpoint").setup()
+    end,
+  },
+  {
     "gen740/SmoothCursor.nvim",
     config = function()
       require("smoothcursor").setup()
