@@ -1,46 +1,35 @@
 return {
-  { "rose-pine/neovim", name = "rose-pine", lazy = false },
-  -- { "xiyaowong/transparent.nvim", lazy = false },
-  { "cooperuser/glowbeam.nvim", event = "VeryLazy" },
-  { "lmintmate/blue-mood-vim", event = "VeryLazy" },
-  { "morhetz/gruvbox", event = "VeryLazy" },
-  { "sainnhe/everforest", event = "VeryLazy" },
-  { "khoido2003/classic_monokai.nvim", event = "VeryLazy" },
-  { "szammyboi/dune.nvim", event = "VeryLazy" },
-  { "leobeosab/tearout.nvim", event = "VeryLazy" },
-  {
-    "HampusHauffman/peacock.nvim",
-    lazy = false,
-    config = function()
-      require("peacock").setup()
-    end,
-  },
-  {
-    "rktjmp/lush.nvim",
-    { dir = "~/.local/share/nvim/lazy/my.vim", lazy = true },
-  },
-  {
-    "aileot/ex-colors.nvim",
-    lazy = true,
-    cmd = "ExColors",
-    ---@type ExColors.Config
-    opts = {},
-    -- config = function()
-    --   vim.cmd("colorscheme ex-camouflage")
-    -- end,
-  },
-  {
-    "rachartier/tiny-glimmer.nvim",
-    event = "VeryLazy",
-    opts = {
-      enable = true,
-      overwrite = {
-        auto_map = true,
-        yank = { enabled = true },
-        paste = { enabled = true },
-        undo = { enabled = true },
-        redo = { enabled = true },
-      },
-    },
-  },
+	{ "rose-pine/neovim", name = "rose-pine", lazy = false },
+	{ "cooperuser/glowbeam.nvim", event = "VeryLazy" },
+	{ "lmintmate/blue-mood-vim", event = "VeryLazy" },
+	{ "morhetz/gruvbox", event = "VeryLazy" },
+	{ "sainnhe/everforest", event = "VeryLazy" },
+	{ "khoido2003/classic_monokai.nvim", event = "VeryLazy" },
+	{ "szammyboi/dune.nvim", event = "VeryLazy" },
+	{ "leobeosab/tearout.nvim", event = "VeryLazy" },
+	{
+		"HampusHauffman/peacock.nvim",
+		lazy = false,
+		config = function()
+			require("peacock").setup()
+		end,
+	},
+	{
+		"rktjmp/lush.nvim",
+		{ dir = "~/.local/share/nvim/lazy/my.vim", lazy = true },
+	},
+	{
+		"rachartier/tiny-glimmer.nvim",
+		event = "LazyFile",
+		opts = {
+			enable = true,
+			overwrite = {
+				auto_map = true,
+				yank = { enabled = true },
+				paste = { enabled = true },
+				undo = { enabled = true },
+				redo = { enabled = true },
+			},
+		},
+	},
 }

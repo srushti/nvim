@@ -4,33 +4,29 @@ return {
 		dependencies = {
 			"OXY2DEV/markview.nvim",
 		},
-		version = false, -- last release is way too old and doesn't work on Windows
+		lazy = false, -- nvim-treesitter should not be lazy-loaded
+		branch = "main",
 		build = ":TSUpdate",
-		event = { "LazyFile", "VeryLazy" },
-		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
 		init = function(plugin)
-			-- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-			-- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-			-- no longer trigger the **nvim-treesitter** module to be loaded in time.
-			-- Luckily, the only things that those plugins need are the custom queries, which we make available
-			-- during startup.
+			-- Add nvim-treesitter to runtime path early
 			require("lazy.core.loader").add_to_rtp(plugin)
 		end,
-		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-		keys = {
-			{ "<c-space>", desc = "Increment Selection" },
-			{ "<bs>", desc = "Decrement Selection", mode = "x" },
-		},
-		opts_extend = { "ensure_installed" },
-		---@type TSConfig
-		---@diagnostic disable-next-line: missing-fields
+		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
 		opts = {
-			highlight = { enable = true },
-			indent = { enable = true },
-			ensure_installed = {
+			-- Install parsers synchronously (only applied to `ensure_installed`)
+			sync_install = false,
+			-- Automatically install missing parsers when entering buffer
+			auto_install = true,
+		},
+		config = function(_, opts)
+			-- Install the required parsers
+			local parsers_to_install = {
 				"bash",
 				"c",
 				"diff",
+				"elixir",
+				"eex",
+				"heex",
 				"html",
 				"javascript",
 				"jsdoc",
@@ -52,43 +48,29 @@ return {
 				"vimdoc",
 				"xml",
 				"yaml",
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
-			},
-			textobjects = {
-				move = {
-					enable = true,
-					goto_next_start = {
-						["]f"] = "@function.outer",
-						["]c"] = "@class.outer",
-						["]a"] = "@parameter.inner",
-					},
-					goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-					goto_previous_start = {
-						["[f"] = "@function.outer",
-						["[c"] = "@class.outer",
-						["[a"] = "@parameter.inner",
-					},
-					goto_previous_end = {
-						["[F"] = "@function.outer",
-						["[C"] = "@class.outer",
-						["[A"] = "@parameter.inner",
-					},
-				},
-			},
-		},
-		---@param opts TSConfig
-		config = function(_, opts)
-			if type(opts.ensure_installed) == "table" then
-				opts.ensure_installed = LazyVim.dedup(opts.ensure_installed)
-			end
+			}
+
+			-- Setup nvim-treesitter with options
+			require("nvim-treesitter").setup(opts)
+
+			-- Install parsers asynchronously
+			require("nvim-treesitter").install(parsers_to_install)
+
+			-- Enable treesitter highlighting for all supported filetypes
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "*",
+				callback = function()
+					pcall(vim.treesitter.start)
+				end,
+			})
+
+			-- Specifically ensure Elixir highlighting
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "elixir", "eex", "heex" },
+				callback = function()
+					vim.treesitter.start()
+				end,
+			})
 		end,
 	},
 	{
@@ -104,36 +86,5 @@ return {
 			require("tiny-inline-diagnostic").setup()
 			vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
 		end,
-	},
-	{
-		"elixir-tools/elixir-tools.nvim",
-		version = "*",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local elixir = require("elixir")
-			local elixirls = require("elixir.elixirls")
-
-			elixir.setup({
-				nextls = { enable = true },
-				elixirls = {
-					enable = true,
-					settings = elixirls.settings({
-						dialyzerEnabled = false,
-						enableTestLenses = false,
-					}),
-					on_attach = function(client, bufnr)
-						vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-						vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-						vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-					end,
-				},
-				projectionist = {
-					enable = true,
-				},
-			})
-		end,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
 	},
 }

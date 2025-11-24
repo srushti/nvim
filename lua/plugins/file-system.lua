@@ -80,6 +80,12 @@ return {
 		},
 	},
 	{
+		"A7Lavinraj/fyler.nvim",
+		dependencies = { "nvim-mini/mini.icons" },
+		branch = "stable", -- Use stable branch for production
+		opts = {},
+	},
+	{
 		"stevearc/oil.nvim",
 		---@module 'oil'
 		---@type oil.SetupOpts
