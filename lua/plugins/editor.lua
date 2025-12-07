@@ -135,7 +135,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = {
 			{
-				"giuxtaposition/blink-cmp-copilot",
+				-- "giuxtaposition/blink-cmp-copilot",
 				"Kaiser-Yang/blink-cmp-avante",
 				"mikavilpas/blink-ripgrep.nvim",
 				"rafamadriz/friendly-snippets",
@@ -143,17 +143,14 @@ return {
 			},
 		},
 		opts = {
-			keymap = {
-				["<A-m>"] = require("minuet").make_blink_map(),
-			},
 			sources = {
-				default = { "lsp", "path", "ripgrep", "snippets", "minuet", "copilot", "avante" },
+				default = { "lsp", "path", "ripgrep", "snippets", "minuet", "avante" },
 				providers = {
 					minuet = {
 						name = "minuet",
 						module = "minuet.blink",
 						async = true,
-						timeout_ms = 3000,
+						timeout_ms = 1000,
 						score_offset = 50,
 						transform_items = function(_, items)
 							for _, item in ipairs(items) do
@@ -165,12 +162,12 @@ return {
 							return items
 						end,
 					},
-					copilot = {
-						name = "copilot",
-						module = "blink-cmp-copilot",
-						score_offset = 100,
-						async = true,
-					},
+					-- copilot = {
+					-- 	name = "copilot",
+					-- 	module = "blink-cmp-copilot",
+					-- 	score_offset = 100,
+					-- 	async = true,
+					-- },
 					avante = {
 						module = "blink-cmp-avante",
 						name = "Avante",

@@ -12,7 +12,7 @@ return {
 					anti_conceal = { enabled = false },
 					file_types = { "markdown", "opencode_output" },
 				},
-				ft = { "markdown", "Avante", "copilot-chat", "opencode_output" },
+				ft = { "markdown", "Avante", "opencode_output" },
 			},
 			"saghen/blink.cmp",
 			"ibhagwan/fzf-lua",
@@ -52,10 +52,13 @@ return {
 			},
 			config = function()
 				require("minuet").setup({
-					provider = "openai",
+					provider = "gemini",
 					provider_options = {
 						openai = {
 							model = "gpt-4.1-mini",
+						},
+						gemini = {
+							model = "gemini-2.5-flash",
 						},
 					},
 				})
@@ -157,7 +160,7 @@ return {
 			"Kaiser-Yang/blink-cmp-avante",
 			"ibhagwan/fzf-lua",
 			"nvim-tree/nvim-web-devicons",
-			"zbirenbaum/copilot.lua",
+			-- "zbirenbaum/copilot.lua",
 			{
 				-- Make sure to set this up properly if you have lazy=true
 				"MeanderingProgrammer/render-markdown.nvim",
@@ -168,32 +171,32 @@ return {
 			},
 		},
 	},
-	{ "giuxtaposition/blink-cmp-copilot", event = "VeryLazy", dependencies = "zbirenbaum/copilot.lua" },
+	-- { "giuxtaposition/blink-cmp-copilot", event = "VeryLazy", dependencies = "zbirenbaum/copilot.lua" },
 	{ "Kaiser-Yang/blink-cmp-avante", event = "VeryLazy", dependencies = "yetone/avante.nvim" },
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		build = ":Copilot auth",
-		event = "InsertEnter",
-		opts = {
-			suggestion = {
-				enabled = false,
-				auto_trigger = true,
-				keymap = {
-					accept = false, -- handled by nvim-cmp / blink.cmp
-					next = "<M-]>",
-					prev = "<M-[>",
-				},
-			},
-			panel = { enabled = false },
-			filetypes = {
-				markdown = true,
-				javascript = true,
-				typescript = true,
-				ruby = true,
-				lua = true,
-				help = true,
-			},
-		},
-	},
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	cmd = "Copilot",
+	-- 	build = ":Copilot auth",
+	-- 	event = "InsertEnter",
+	-- 	opts = {
+	-- 		suggestion = {
+	-- 			enabled = false,
+	-- 			auto_trigger = true,
+	-- 			keymap = {
+	-- 				accept = false, -- handled by nvim-cmp / blink.cmp
+	-- 				next = "<M-]>",
+	-- 				prev = "<M-[>",
+	-- 			},
+	-- 		},
+	-- 		panel = { enabled = false },
+	-- 		filetypes = {
+	-- 			markdown = true,
+	-- 			javascript = true,
+	-- 			typescript = true,
+	-- 			ruby = true,
+	-- 			lua = true,
+	-- 			help = true,
+	-- 		},
+	-- 	},
+	-- },
 }
