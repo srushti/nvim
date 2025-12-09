@@ -109,13 +109,6 @@ return {
 		event = "LazyFile",
 		optional = true,
 		opts = {
-			formatters = {
-				kulala = {
-					command = "kulala-fmt",
-					args = { "format", "$FILENAME" },
-					stdin = false,
-				},
-			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				-- Conform will run multiple formatters sequentially
@@ -125,7 +118,6 @@ return {
 				-- Conform will run the first available formatter
 				typescript = { "biome", "biome-check", "biome-organize-imports" },
 				-- javascript = { "prettierd", "prettier" },
-				http = { "kulala" },
 				ruby = { "rubocop", "rubocop-autocorrect" },
 				elixir = { "mix" },
 			},

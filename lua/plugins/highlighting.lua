@@ -27,6 +27,7 @@ return {
 				"elixir",
 				"eex",
 				"heex",
+				"gleam",
 				"html",
 				"javascript",
 				"jsdoc",
