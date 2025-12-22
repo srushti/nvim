@@ -2,9 +2,10 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"OXY2DEV/markview.nvim",
+			--"OXY2DEV/markview.nvim",
+			"nvim-treesitter/nvim-treesitter-context",
 		},
-		lazy = false, -- nvim-treesitter should not be lazy-loaded
+		lazy = false,
 		branch = "main",
 		build = ":TSUpdate",
 		init = function(plugin)
