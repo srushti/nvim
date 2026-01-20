@@ -1,45 +1,6 @@
 return {
 	{ "r0nsha/multinput.nvim", event = "VeryLazy" },
 	{
-		"retran/meow.yarn.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		config = function()
-			require("meow.yarn").setup({
-				-- Your config here
-			})
-		end,
-		keys = {
-			{
-				"<leader>mt",
-				function()
-					require("meow.yarn").open_tree("type_hierarchy", "supertypes")
-				end,
-				desc = "Supertypes",
-			},
-			{
-				"<leader>mT",
-				function()
-					require("meow.yarn").open_tree("type_hierarchy", "subtypes")
-				end,
-				desc = "Subtypes",
-			},
-			{
-				"<leader>mc",
-				function()
-					require("meow.yarn").open_tree("type_hierarchy", "callers")
-				end,
-				desc = "Callers",
-			},
-			{
-				"<leader>mC",
-				function()
-					require("meow.yarn").open_tree("type_hierarchy", "callees")
-				end,
-				desc = "Callees",
-			},
-		},
-	},
-	{
 		"kylechui/nvim-surround",
 		event = "VeryLazy",
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },

@@ -28,10 +28,7 @@ return {
 	},
 	{ "akinsho/git-conflict.nvim", version = "*", config = true },
 	{ "sindrets/diffview.nvim" },
-	{
-		"esmuellert/vscode-diff.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-	},
+	{ "esmuellert/codediff.nvim", dependencies = { "MunifTanjim/nui.nvim" }, cmd = "CodeDiff" },
 	{
 		"tanvirtin/vgit.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },

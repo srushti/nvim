@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("BufLeave", {
 	desc = "Write all files on changing buffers",
 	nested = true,
 	callback = function()
-		vim.cmd("wa")
+		vim.cmd("w")
 	end,
 })
 
