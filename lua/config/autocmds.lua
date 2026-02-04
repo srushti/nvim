@@ -5,11 +5,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufLeave", {
-	desc = "Write all files on changing buffers",
-	nested = true,
+vim.api.nvim_create_autocmd({ "BufLeave" }, {
 	callback = function()
-		vim.cmd("w")
+		local buf = vim.api.nvim_get_current_buf()
+		-- Only save if the buffer has a name and has been modified
+		if vim.api.nvim_buf_get_name(buf) ~= "" and vim.bo.modified then
+			vim.cmd("silent! write")
+		end
 	end,
 })
 

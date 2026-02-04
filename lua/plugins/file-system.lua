@@ -95,22 +95,15 @@ return {
 		},
 	},
 	{
-		"xzbdmw/clasp.nvim",
-		config = function()
-			require("clasp").setup({
-				pairs = { ["{"] = "}", ['"'] = '"', ["'"] = "'", ["("] = ")", ["["] = "]" },
-			})
+		"saghen/blink.pairs",
+		version = "*", -- (recommended) only required with prebuilt binaries
 
-			-- jumping from smallest region to largest region
-			vim.keymap.set({ "n", "i" }, "<c-l>", function()
-				require("clasp").wrap("next")
-			end)
+		-- download prebuilt binaries from github releases
+		dependencies = "saghen/blink.download",
 
-			-- jumping from largest region to smallest region
-			vim.keymap.set({ "n", "i" }, "<c-l>", function()
-				require("clasp").wrap("prev")
-			end)
-		end,
+		--- @module 'blink.pairs'
+		--- @type blink.pairs.Config
+		opts = {},
 	},
 	{
 		"leath-dub/snipe.nvim",

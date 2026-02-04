@@ -47,7 +47,6 @@ return {
 			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
 		},
 	},
-	{ "HiPhish/rainbow-delimiters.nvim", event = "LazyFile" },
 	{
 		"hedyhli/outline.nvim",
 		event = "LazyFile",
