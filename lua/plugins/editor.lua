@@ -87,8 +87,6 @@ return {
 		"saghen/blink.cmp",
 		dependencies = {
 			{
-				-- "giuxtaposition/blink-cmp-copilot",
-				"Kaiser-Yang/blink-cmp-avante",
 				"mikavilpas/blink-ripgrep.nvim",
 				"rafamadriz/friendly-snippets",
 				"milanglacier/minuet-ai.nvim",
@@ -96,8 +94,12 @@ return {
 		},
 		opts = {
 			sources = {
-				default = { "lsp", "path", "ripgrep", "snippets", "minuet", "avante" },
+				default = { "lsp", "path", "ripgrep", "snippets", "minuet" },
 				providers = {
+					buffer = {
+						min_keyword_length = 1,
+						score_offset = 5,
+					},
 					minuet = {
 						name = "minuet",
 						module = "minuet.blink",
@@ -109,37 +111,6 @@ return {
 								item.kind_icon = "💃🏽"
 								item.labelDisplays = {
 									description = "(minuet)",
-								}
-							end
-							return items
-						end,
-					},
-					-- copilot = {
-					-- 	name = "copilot",
-					-- 	module = "blink-cmp-copilot",
-					-- 	score_offset = 100,
-					-- 	async = true,
-					-- },
-					avante = {
-						module = "blink-cmp-avante",
-						name = "Avante",
-						opts = {
-							command = {
-								get_kind_name = function()
-									return "AvanteCmd"
-								end,
-							},
-							mention = {
-								get_kind_name = function()
-									return "AvanteMention"
-								end,
-							},
-						},
-						transform_items = function(_, items)
-							for _, item in ipairs(items) do
-								item.kind_icon = "⏩︎"
-								item.labelDisplays = {
-									description = "(avante)",
 								}
 							end
 							return items

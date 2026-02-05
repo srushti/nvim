@@ -1,5 +1,18 @@
 return {
 	{
+		"NeogitOrg/neogit",
+		lazy = true,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"ibhagwan/fzf-lua",
+		},
+		cmd = "Neogit",
+		keys = {
+			{ "<leader>gg", "<cmd>Neogit kind=split_below<cr>", desc = "Show Neogit UI" },
+		},
+	},
+	{
 		"tpope/vim-fugitive",
 		event = "LazyFile",
 		config = function()
