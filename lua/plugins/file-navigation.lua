@@ -53,7 +53,7 @@ return {
 			end
 		end,
 		keys = {
-			{ "<leader>a", ":Ack! ", "Search using ack or ag" },
+			{ "<leader>aa", ":Ack! ", "Search using ack or ag" },
 		},
 	},
 }
