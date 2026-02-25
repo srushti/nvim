@@ -1,11 +1,13 @@
-vim.api.nvim_create_autocmd("BufWritePre", {
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)
 		require("conform").format({ bufnr = args.buf })
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufLeave" }, {
+autocmd({ "BufLeave" }, {
 	callback = function()
 		local buf = vim.api.nvim_get_current_buf()
 		-- Only save if the buffer has a name and has been modified
@@ -17,7 +19,7 @@ vim.api.nvim_create_autocmd({ "BufLeave" }, {
 
 local lsp_hacks = vim.api.nvim_create_augroup("LspHacks", { clear = true })
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+autocmd({ "BufNewFile", "BufReadPost" }, {
 	group = lsp_hacks,
 	pattern = ".env*",
 	callback = function(e)
@@ -25,9 +27,22 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	pattern = { "typescript", "typescriptreact" },
 	callback = function()
 		vim.opt_local.makeprg = "./node_modules/.bin/tsc | sed 's/(\\(.*\\),\\(.*\\)):/:\\1:\\2:/'"
+	end,
+})
+
+autocmd("BufWritePre", {
+	pattern = { "*.tsx", "*.ts" },
+	callback = function()
+		vim.lsp.buf.code_action({
+			apply = true,
+			context = {
+				only = { "source.removeUnused.ts" },
+				diagnostics = {},
+			},
+		})
 	end,
 })
