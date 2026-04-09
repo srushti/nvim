@@ -11,3 +11,6 @@ vim.opt.clipboard = ""
 vim.g.lazyvim_prettier_needs_config = false
 
 vim.g.completeopt = "menu,menuone,noselect,fuzzy,nosort"
+
+vim.cmd.packadd("nvim.undotree")
+require("vim._core.ui2").enable({})

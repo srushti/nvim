@@ -48,7 +48,7 @@ return {
 		event = "LazyFile",
 		config = function()
 			if 1 == vim.fn.executable("rg") then
-				vim.g.ackprg = "rg --vimgrep --smart-case --hidden"
+				vim.g.ackprg = "rg --vimgrep --smart-case --hidden  -g '!.git/'"
 				vim.g.ack_use_cword_for_empty_search = 1
 			end
 		end,

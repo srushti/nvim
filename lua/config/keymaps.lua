@@ -40,6 +40,7 @@ vim.keymap.set("n", "<C-j>", "ddp")
 vim.keymap.set("n", "<C-k>", "kddpk")
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })
+vim.keymap.set("n", "<leader>u", ":Undotree", { noremap = true, silent = true })
 
 local wk = require("which-key")
 wk.add({
