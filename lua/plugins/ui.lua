@@ -1,7 +1,6 @@
 return {
 	{
 		"srushti/apple-music.nvim",
-		name = "apple-music.nvim",
 
 		event = "VeryLazy",
 
