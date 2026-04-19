@@ -7,6 +7,7 @@ vim.o.colorcolumn = "120"
 vim.o.number = true
 vim.o.relativenumber = false
 vim.opt.clipboard = ""
+vim.o.scrolloff = 2
 
 vim.g.lazyvim_prettier_needs_config = false
 
