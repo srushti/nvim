@@ -26,7 +26,6 @@ return {
 						height = 20,
 						padding = 1,
 					},
-					{ section = "startup" },
 				},
 			},
 		},
