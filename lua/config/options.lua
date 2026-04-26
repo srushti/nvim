@@ -1,5 +1,6 @@
 vim.g.mapleader = ","
 vim.opt.swapfile = false
+vim.o.hidden = true
 vim.opt.mouse = "nv"
 
 vim.o.cursorcolumn = true
