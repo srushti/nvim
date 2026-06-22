@@ -1,5 +1,15 @@
 return {
 	{
+		"Mirsmog/real-icons.nvim",
+		build = ":RealIconsInstallPack material",
+		opts = {
+			pack = "material",
+			integrations = {
+				telescope = true,
+			},
+		},
+	},
+	{
 		"hedyhli/outline.nvim",
 		lazy = true,
 		cmd = { "Outline", "OutlineOpen" },
