@@ -89,6 +89,9 @@ return {
 						end
 						return sl.component()
 					end,
+					function()
+						return vim.ui.progress_status()
+					end,
 					"  ",
 					"cool_symbol",
 					"  ",
