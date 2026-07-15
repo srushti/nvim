@@ -104,6 +104,9 @@ return {
 		--- @module 'blink.pairs'
 		--- @type blink.pairs.Config
 		opts = {},
+		build = function()
+			require("blink.pairs").build():pwait(60000)
+		end,
 	},
 	{
 		"leath-dub/snipe.nvim",

@@ -1,0 +1,7 @@
+{
+  "Select": {
+    "prefix": "sf",
+    "body": ["select ${1:*} from ${2:table}"],
+    "description": "Select query"
+  }
+}

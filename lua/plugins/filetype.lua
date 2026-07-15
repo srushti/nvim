@@ -8,6 +8,7 @@ return {
 			opts = {
 				snippets = {
 					gen_loader.from_file("~/.config/nvim/snippets/global.json"),
+					gen_loader.from_lang(),
 				},
 
 				-- Module mappings. Use `''` (empty string) to disable one.
