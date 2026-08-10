@@ -17,14 +17,6 @@ return {
 			{ "<leader>ol", "<cmd>Outline<CR>", desc = "Toggle outline" },
 		},
 	},
-	{
-		"zerochae/endpoint.nvim",
-		dependencies = { "stevearc/dressing.nvim" },
-		cmd = { "Endpoint", "EndpointRefresh" },
-		config = function()
-			require("endpoint").setup()
-		end,
-	},
 	{ "samiulsami/fFtT-highlights.nvim", event = "LazyFile" },
 	{
 		"aaronik/treewalker.nvim",
