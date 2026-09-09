@@ -1,9 +1,7 @@
 return {
 	{
 		"p5quared/apple-music.nvim",
-		-- Optional dependencies (install one of the supported pickers, e.g., 'nvim-telescope/telescope.nvim' for Telescope or 'ibhagwan/fzf-lua' for fzf-based picker)
 		dependencies = {
-			--   'nvim-telescope/telescope.nvim'
 			"ibhagwan/fzf-lua",
 		},
 		config = true,
@@ -14,6 +12,7 @@ return {
 					require("apple-music").toggle_play()
 				end,
 				desc = "Toggle Playback",
+				color = "green",
 			},
 			{
 				"<leader>ms",
@@ -21,6 +20,7 @@ return {
 					require("apple-music").toggle_shuffle()
 				end,
 				desc = "Toggle [S]huffle",
+				color = "yellow",
 			},
 			{
 				"<leader>mp",
@@ -28,6 +28,7 @@ return {
 					require("apple-music").select_playlist()
 				end,
 				desc = "Find [P]laylists",
+				color = "red",
 			},
 			{
 				"<leader>ma",
@@ -35,6 +36,7 @@ return {
 					require("apple-music").select_album()
 				end,
 				desc = "Find [A]lbum",
+				color = "red",
 			},
 			{
 				"<leader>ms",
@@ -42,6 +44,7 @@ return {
 					require("apple-music").select_track()
 				end,
 				desc = "Find [S]ong",
+				color = "red",
 			},
 			{
 				"<leader>mx",
@@ -49,76 +52,10 @@ return {
 					require("apple-music").cleanup_all()
 				end,
 				desc = "Cleanup Temp Playlists",
+				color = "grey",
 			},
 		},
 	},
-	-- {
-	-- 	"srushti/apple-music.nvim",
-	--
-	-- 	event = "VeryLazy",
-	--
-	-- 	opts = {
-	-- 		auto_start = true,
-	-- 		notify_track = false,
-	-- 	},
-	--
-	-- 	init = function()
-	-- 		local ok, wk = pcall(require, "which-key")
-	-- 		if ok then
-	-- 			wk.add({ { "<leader>m", group = " Music" } })
-	-- 		end
-	-- 	end,
-	--
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>m<space>",
-	-- 			"<cmd>AppleMusicPlayPause<cr>",
-	-- 			desc = "Play / Pause",
-	-- 		},
-	-- 		{
-	-- 			"<leader>mn",
-	-- 			"<cmd>AppleMusicNext<cr>",
-	-- 			desc = "Next track",
-	-- 		},
-	-- 		{
-	-- 			"<leader>mp",
-	-- 			"<cmd>AppleMusicPrev<cr>",
-	-- 			desc = "Previous track",
-	-- 		},
-	-- 		{
-	-- 			"<leader>mi",
-	-- 			"<cmd>AppleMusicInfo<cr>",
-	-- 			desc = "Now playing info",
-	-- 		},
-	-- 		{
-	-- 			"<leader>mr",
-	-- 			"<cmd>AppleMusicRefresh<cr>",
-	-- 			desc = "Refresh statusline",
-	-- 		},
-	-- 		{
-	-- 			"<leader>mf",
-	-- 			"<cmd>AppleMusicToggleFavourite<cr>",
-	-- 			desc = "Toggle Favourite-ness",
-	-- 		},
-	-- 	},
-	--
-	-- 	config = function(_, opts)
-	-- 		-- This part actually initializes your music plugin with the opts above
-	-- 		require("apple-music").setup(opts)
-	--
-	-- 		-- This part tells which-key to add the icons to the keys we defined
-	-- 		local wk = require("which-key")
-	-- 		wk.add({
-	-- 			{ "<leader>m", group = "Music", icon = { icon = "󰝚", color = "purple" } },
-	-- 			{ "<leader>m<space>", icon = { icon = "⏯ ", color = "green" } },
-	-- 			{ "<leader>mn", icon = { icon = "⏭ ", color = "azure" } },
-	-- 			{ "<leader>mp", icon = { icon = "⏮ ", color = "azure" } },
-	-- 			{ "<leader>mr", icon = { icon = "󰑓 ", color = "orange" } },
-	-- 			{ "<leader>mi", icon = { icon = "󰎆 ", color = "yellow" } },
-	-- 			{ "<leader>mf", icon = { icon = "󰓎 ", color = "red" } },
-	-- 		})
-	-- 	end,
-	-- },
 	{
 		"tamton-aquib/staline.nvim",
 		event = "VeryLazy",

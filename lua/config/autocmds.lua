@@ -42,13 +42,13 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		local status = value.kind == "end" and 0 or 1
 		local percent = value.percentage or 0
 
-		local osc_seq = string.format("\27]9;4;%d;%d\a", status, percent)
-
 		if os.getenv("TMUX") then
-			osc_seq = string.format("\27Ptmux;\27%s\27\\", osc_seq)
+			-- DCS passthrough: double the ESC, use ST (\033\\) not BEL as inner terminator
+			local osc_seq = string.format("\27Ptmux;\27\27]9;4;%d;%d\27\27\\\27\\", status, percent)
+			vim.api.nvim_chan_send(2, osc_seq)
+		else
+			local osc_seq = string.format("\27]9;4;%d;%d\27\\", status, percent)
+			vim.api.nvim_chan_send(2, osc_seq)
 		end
-
-		io.stdout:write(osc_seq)
-		io.stdout:flush()
 	end,
 })
