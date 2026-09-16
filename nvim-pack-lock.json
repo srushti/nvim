@@ -1,3 +1,19 @@
 {
-  "plugins": []
+  "plugins": {
+    "leap.nvim": {
+      "rev": "38af0ab56c6eb8757ee6006dd13ab79c2bc11a49",
+      "src": "https://codeberg.org/andyg/leap.nvim",
+      "version": "'main'"
+    },
+    "nvim-chainsaw": {
+      "rev": "78a0e68c59f4e7760f33dacde0ff21b2498c015e",
+      "src": "https://github.com/chrisgrieser/nvim-chainsaw",
+      "version": "'main'"
+    },
+    "nvim-hlslens": {
+      "rev": "be2d7b2be01860b5445a007ff2bc72b29896db6b",
+      "src": "https://github.com/kevinhwang91/nvim-hlslens",
+      "version": "'main'"
+    }
+  }
 }
