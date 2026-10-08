@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "imli-nvim": {
+      "rev": "190de51a8f4df67923cc64a579851714bba2e58b",
+      "src": "https://github.com/hitaishi2222/imli-nvim.git",
+      "version": "'main'"
+    },
     "leap.nvim": {
       "rev": "38af0ab56c6eb8757ee6006dd13ab79c2bc11a49",
       "src": "https://codeberg.org/andyg/leap.nvim",
