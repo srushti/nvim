@@ -9,6 +9,7 @@ return {
 			lazygit = {
 				configure = false,
 			},
+			scroll = { enabled = false },
 		},
 	},
 	{
