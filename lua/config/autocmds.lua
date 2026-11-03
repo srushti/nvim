@@ -32,23 +32,53 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Mirror LSP $/progress onto the terminal's OSC 9;4 progress bar (kitty, ghostty, wezterm, ...)
+local function term_progress(state)
+	local osc = "\27]9;4;" .. state .. "\7"
+	if os.getenv("TMUX") then
+		-- DCS passthrough; needs `set -g allow-passthrough on` in tmux
+		osc = "\27Ptmux;\27" .. osc .. "\27\\"
+	end
+	vim.api.nvim_chan_send(2, osc)
+end
+
+-- In-flight progress tokens across all clients: key -> percentage (or false if unknown)
+local lsp_progress = {}
+
 vim.api.nvim_create_autocmd("LspProgress", {
+	group = lsp_hacks,
 	callback = function(ev)
 		local value = ev.data.params.value or {}
 		if not value.kind then
 			return
 		end
 
-		local status = value.kind == "end" and 0 or 1
-		local percent = value.percentage or 0
-
-		if os.getenv("TMUX") then
-			-- DCS passthrough: double the ESC, use ST (\033\\) not BEL as inner terminator
-			local osc_seq = string.format("\27Ptmux;\27\27]9;4;%d;%d\27\27\\\27\\", status, percent)
-			vim.api.nvim_chan_send(2, osc_seq)
+		local key = ev.data.client_id .. ":" .. tostring(ev.data.params.token)
+		if value.kind == "end" then
+			lsp_progress[key] = nil
 		else
-			local osc_seq = string.format("\27]9;4;%d;%d\27\\", status, percent)
-			vim.api.nvim_chan_send(2, osc_seq)
+			lsp_progress[key] = value.percentage or false
 		end
+
+		if next(lsp_progress) == nil then
+			term_progress("0")
+			return
+		end
+
+		-- Show the slowest task; fall back to indeterminate if none report a percentage
+		local min
+		for _, pct in pairs(lsp_progress) do
+			if pct and (not min or pct < min) then
+				min = pct
+			end
+		end
+		term_progress(min and ("1;" .. min) or "3")
+	end,
+})
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	group = lsp_hacks,
+	callback = function()
+		term_progress("0")
 	end,
 })
