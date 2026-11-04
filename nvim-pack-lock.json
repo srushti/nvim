@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "diffbandit.nvim": {
+      "rev": "f190e33d807c07a97259472e13a3bba3299f0f80",
+      "src": "https://github.com/CoreyKaylor/diffbandit.nvim",
+      "version": "'main'"
+    },
     "imli-nvim": {
       "rev": "190de51a8f4df67923cc64a579851714bba2e58b",
       "src": "https://github.com/hitaishi2222/imli-nvim.git",

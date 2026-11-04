@@ -4,7 +4,7 @@ vim.pack.add({
 		-- Pin to a branch/tag/commit for reproducible installs. Update deliberately.
 		version = "main",
 	},
-})
+}, { load = true })
 
 require("hlslens").setup()
 

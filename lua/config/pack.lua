@@ -2,8 +2,13 @@
 -- lazy.nvim/LazyVim. Migration staging ground: move plugins off lazy one at a time.
 --
 -- To add a plugin: drop a new file in lua/pack/<name>.lua. That's it -- no edit to
--- init.lua or this file. Each pack file is self-contained: it calls vim.pack.add,
--- packadd's the plugin (see note below), and sets its own keymaps/autocmds.
+-- init.lua or this file. Each pack file is self-contained: it calls vim.pack.add
+-- with { load = true } and sets its own keymaps/autocmds.
+--
+-- Why load = true: during init.lua, vim.pack.add defaults to load = false (like
+-- :packadd!), relying on Neovim's startup step to source plugin/ files. lazy.nvim
+-- disables that step (loadplugins = false), so without load = true a pack plugin's
+-- plugin/ scripts (commands, <Plug> maps) never run.
 --
 -- vim.pack has no lockfile; the `version` field in each spec IS the pin.
 

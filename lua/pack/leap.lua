@@ -6,13 +6,7 @@ vim.pack.add({
 		-- Pin to a branch/tag/commit for reproducible installs. Update deliberately.
 		version = "main",
 	},
-})
-
--- vim.pack installs into pack/core/opt/ (optional), so the plugin's plugin/ scripts
--- are NOT auto-sourced -- and it's those scripts that define <Plug>(leap) et al.
--- Explicitly packadd to source them; without this, the <Plug> targets below don't
--- exist and every mapping silently falls through to the builtin key.
-vim.cmd("packadd leap.nvim")
+}, { load = true })
 
 -- leap.nvim keymaps. See `:h leap-mappings`, `:h leap.visit-mappings`.
 -- `s`/`S` are deliberately kept as builtin Vim (Substitute / change-line).
