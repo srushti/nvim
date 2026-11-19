@@ -5,6 +5,10 @@
       "src": "https://github.com/CoreyKaylor/diffbandit.nvim",
       "version": "'main'"
     },
+    "fzf-lua": {
+      "rev": "82ddfe6efc56480c052fd213e0cbb2f024dfd754",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
     "imli-nvim": {
       "rev": "190de51a8f4df67923cc64a579851714bba2e58b",
       "src": "https://github.com/hitaishi2222/imli-nvim.git",
@@ -24,6 +28,19 @@
       "rev": "be2d7b2be01860b5445a007ff2bc72b29896db6b",
       "src": "https://github.com/kevinhwang91/nvim-hlslens",
       "version": "'main'"
+    },
+    "nvim-treesitter": {
+      "rev": "37e52c733ada9d8d544d53a763140ef1ba404353",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
+    "sqlite.lua": {
+      "rev": "50092d60feb242602d7578398c6eb53b4a8ffe7b",
+      "src": "https://github.com/kkharji/sqlite.lua"
+    },
+    "treetags.nvim": {
+      "rev": "3feff0e65d6f0a34772a137ce165e1e14a8c1d77",
+      "src": "https://github.com/leblocks/treetags.nvim"
     }
   }
 }
